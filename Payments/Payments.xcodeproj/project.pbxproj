@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		C08DE8562497051000A4DC3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C08DE8552497051000A4DC3E /* main.m */; };
+		C08DE85E24970A7900A4DC3E /* InputHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C08DE85D24970A7900A4DC3E /* InputHandler.m */; };
+		C08DE86124970D6500A4DC3E /* PaymentGateway.m in Sources */ = {isa = PBXBuildFile; fileRef = C08DE86024970D6500A4DC3E /* PaymentGateway.m */; };
+		C08DE8642497120800A4DC3E /* PaypalPaymentService.m in Sources */ = {isa = PBXBuildFile; fileRef = C08DE8632497120800A4DC3E /* PaypalPaymentService.m */; };
+		C08DE8672497123900A4DC3E /* StripePaymentService.m in Sources */ = {isa = PBXBuildFile; fileRef = C08DE8662497123900A4DC3E /* StripePaymentService.m */; };
+		C08DE86A2497124600A4DC3E /* AmazonPaymentService.m in Sources */ = {isa = PBXBuildFile; fileRef = C08DE8692497124600A4DC3E /* AmazonPaymentService.m */; };
+		C08DE86E24971CDE00A4DC3E /* PaymentServiceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C08DE86D24971CDE00A4DC3E /* PaymentServiceFactory.m */; };
+		C08DE871249723B900A4DC3E /* ApplePaymentService.m in Sources */ = {isa = PBXBuildFile; fileRef = C08DE870249723B900A4DC3E /* ApplePaymentService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +32,20 @@
 /* Begin PBXFileReference section */
 		C08DE8522497051000A4DC3E /* Payments */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Payments; sourceTree = BUILT_PRODUCTS_DIR; };
 		C08DE8552497051000A4DC3E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C08DE85C24970A7800A4DC3E /* InputHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputHandler.h; path = ../../Math/Math/InputHandler.h; sourceTree = "<group>"; };
+		C08DE85D24970A7900A4DC3E /* InputHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputHandler.m; path = ../../Math/Math/InputHandler.m; sourceTree = "<group>"; };
+		C08DE85F24970D6500A4DC3E /* PaymentGateway.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentGateway.h; sourceTree = "<group>"; };
+		C08DE86024970D6500A4DC3E /* PaymentGateway.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaymentGateway.m; sourceTree = "<group>"; };
+		C08DE8622497120800A4DC3E /* PaypalPaymentService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaypalPaymentService.h; sourceTree = "<group>"; };
+		C08DE8632497120800A4DC3E /* PaypalPaymentService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaypalPaymentService.m; sourceTree = "<group>"; };
+		C08DE8652497123900A4DC3E /* StripePaymentService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StripePaymentService.h; sourceTree = "<group>"; };
+		C08DE8662497123900A4DC3E /* StripePaymentService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StripePaymentService.m; sourceTree = "<group>"; };
+		C08DE8682497124600A4DC3E /* AmazonPaymentService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmazonPaymentService.h; sourceTree = "<group>"; };
+		C08DE8692497124600A4DC3E /* AmazonPaymentService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AmazonPaymentService.m; sourceTree = "<group>"; };
+		C08DE86C24971CDE00A4DC3E /* PaymentServiceFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PaymentServiceFactory.h; sourceTree = "<group>"; };
+		C08DE86D24971CDE00A4DC3E /* PaymentServiceFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaymentServiceFactory.m; sourceTree = "<group>"; };
+		C08DE86F249723B900A4DC3E /* ApplePaymentService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplePaymentService.h; sourceTree = "<group>"; };
+		C08DE870249723B900A4DC3E /* ApplePaymentService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplePaymentService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +78,31 @@
 		C08DE8542497051000A4DC3E /* Payments */ = {
 			isa = PBXGroup;
 			children = (
+				C08DE85C24970A7800A4DC3E /* InputHandler.h */,
+				C08DE85D24970A7900A4DC3E /* InputHandler.m */,
 				C08DE8552497051000A4DC3E /* main.m */,
+				C08DE86B2497125F00A4DC3E /* payment */,
 			);
 			path = Payments;
+			sourceTree = "<group>";
+		};
+		C08DE86B2497125F00A4DC3E /* payment */ = {
+			isa = PBXGroup;
+			children = (
+				C08DE86F249723B900A4DC3E /* ApplePaymentService.h */,
+				C08DE870249723B900A4DC3E /* ApplePaymentService.m */,
+				C08DE8622497120800A4DC3E /* PaypalPaymentService.h */,
+				C08DE8632497120800A4DC3E /* PaypalPaymentService.m */,
+				C08DE8652497123900A4DC3E /* StripePaymentService.h */,
+				C08DE8662497123900A4DC3E /* StripePaymentService.m */,
+				C08DE8682497124600A4DC3E /* AmazonPaymentService.h */,
+				C08DE8692497124600A4DC3E /* AmazonPaymentService.m */,
+				C08DE85F24970D6500A4DC3E /* PaymentGateway.h */,
+				C08DE86024970D6500A4DC3E /* PaymentGateway.m */,
+				C08DE86C24971CDE00A4DC3E /* PaymentServiceFactory.h */,
+				C08DE86D24971CDE00A4DC3E /* PaymentServiceFactory.m */,
+			);
+			path = payment;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +162,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C08DE86A2497124600A4DC3E /* AmazonPaymentService.m in Sources */,
+				C08DE871249723B900A4DC3E /* ApplePaymentService.m in Sources */,
+				C08DE8672497123900A4DC3E /* StripePaymentService.m in Sources */,
+				C08DE8642497120800A4DC3E /* PaypalPaymentService.m in Sources */,
+				C08DE86124970D6500A4DC3E /* PaymentGateway.m in Sources */,
+				C08DE86E24971CDE00A4DC3E /* PaymentServiceFactory.m in Sources */,
 				C08DE8562497051000A4DC3E /* main.m in Sources */,
+				C08DE85E24970A7900A4DC3E /* InputHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
