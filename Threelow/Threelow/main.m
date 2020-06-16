@@ -7,22 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Dice.h"
+#import "Game.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        Dice * dice1 = [[Dice alloc] init];
-        Dice * dice2 = [[Dice alloc] init];
-        Dice * dice3 = [[Dice alloc] init];
-        Dice * dice4 = [[Dice alloc] init];
-        Dice * dice5 = [[Dice alloc] init];
-        
-        NSLog(@"Dice: %@", dice1);
-        NSLog(@"Dice: %@", dice2);
-        NSLog(@"Dice: %@", dice3);
-        NSLog(@"Dice: %@", dice4);
-        NSLog(@"Dice: %@", dice5);
-        
+        Game *game = [[Game alloc] init];
+        [game run];
     }
     return 0;
 }

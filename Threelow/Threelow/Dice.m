@@ -14,10 +14,18 @@ static NSString *const values[] = {@"⚀", @"⚁", @"⚂", @"⚃", @"⚄", @"⚅
 
 - (instancetype) init {
     if (self = [super init]) {
-        int rand = arc4random_uniform(6) + 1;
-        _value = rand;
+        _value = [Dice randomDice];
     }
     return self;
+}
+
+- (void) roll {
+    _value = [Dice randomDice];
+}
+
++ (NSInteger) randomDice {
+    int rand = arc4random_uniform(6) + 1;
+    return rand;
 }
 
 - (NSString *) description {
