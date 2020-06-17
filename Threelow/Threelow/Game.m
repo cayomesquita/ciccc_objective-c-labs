@@ -14,6 +14,7 @@ static NSString *const QUIT = @"q";
 static NSString *const ROLL = @"roll";
 static NSString *const HOLD = @"hold";
 static NSString *const UNHOLD = @"unhold";
+static NSString *const RESET = @"reset";
 static NSString *const DISPLAY = @"display";
 
 @interface Game ()
@@ -51,6 +52,10 @@ static NSString *const DISPLAY = @"display";
         }
         if ([UNHOLD isEqualToString:[input lowercaseString]]) {
             [self unholdHandler];
+            continue;
+        }
+        if ([RESET isEqualToString:[input lowercaseString]]) {
+            [self resetDices];
             continue;
         }
         if ([DISPLAY isEqualToString:[input lowercaseString]]) {
@@ -114,6 +119,13 @@ static NSString *const DISPLAY = @"display";
             }
         }
     }
+}
+
+- (void) resetDice {
+    for (Dice *dice in _dices) {
+        dice.hold = NO;
+    }
+    NSLog(@"All dices unheld!");
 }
 
 
