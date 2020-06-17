@@ -20,7 +20,9 @@ static NSString *const values[] = {@"⚀", @"⚁", @"⚂", @"⚃", @"⚄", @"⚅
 }
 
 - (void) roll {
-    _value = [Dice randomDice];
+    if (!_hold) {
+        _value = [Dice randomDice];
+    }
 }
 
 + (NSInteger) randomDice {
@@ -29,6 +31,9 @@ static NSString *const values[] = {@"⚀", @"⚁", @"⚂", @"⚃", @"⚄", @"⚅
 }
 
 - (NSString *) description {
+    if (_hold) {
+        return [NSString stringWithFormat:@"[%@]", values[_value - 1]];
+    }
     return values[_value - 1];
 }
 
