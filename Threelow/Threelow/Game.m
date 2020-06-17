@@ -16,11 +16,16 @@ static NSString *const HOLD = @"hold";
 static NSString *const UNHOLD = @"unhold";
 static NSString *const RESET = @"reset";
 static NSString *const DISPLAY = @"display";
+static int const LIMIT_ROLLS = 5;
 
 @interface Game ()
 
 @property (nonatomic) NSArray *dices;
 @property (nonatomic) NSMutableSet *holds;
+@property int rollNum;
+@property (nonatomic) Dice *lastDiceHeld;
+@property BOOL anyDiceHeld;
+
 
 @end
 
@@ -30,20 +35,29 @@ static NSString *const DISPLAY = @"display";
     if (self = [super init]) {
         _dices = [NSArray arrayWithObjects:[[Dice alloc] init], [[Dice alloc] init], [[Dice alloc] init], [[Dice alloc] init], [[Dice alloc] init], nil];
         _holds = [[NSMutableSet alloc] init];
+        _rollNum = 0;
+        _anyDiceHeld = NO;
     }
     return self;
 }
 
 - (void) run {
-    for (; ; ) {
+    while (_rollNum < LIMIT_ROLLS) {
         NSString *input = [InputHandler inputUser:@"Enter menu option: "];
         if ([QUIT isEqualToString:[input lowercaseString]]) {
             break;
         }
         if ([ROLL isEqualToString:[input lowercaseString]]) {
+
             for (Dice *dice in _dices) {
                 [dice roll];
             }
+            _rollNum++;
+            _anyDiceHeld = NO;
+            continue;
+        }
+        if (_rollNum == 0) {
+            NSLog(@"You have to roll dices first!");
             continue;
         }
         if ([HOLD isEqualToString:[input lowercaseString]]) {
@@ -55,11 +69,11 @@ static NSString *const DISPLAY = @"display";
             continue;
         }
         if ([RESET isEqualToString:[input lowercaseString]]) {
-            [self resetDices];
+            [self resetDice];
             continue;
         }
         if ([DISPLAY isEqualToString:[input lowercaseString]]) {
-            NSLog(@"Dices: %@ %@ %@ %@ %@", _dices[0], _dices[1], _dices[2], _dices[3], _dices[4]);
+            [self display];
             continue;
         }
         NSLog(@"Invalid input!");
@@ -83,8 +97,10 @@ static NSString *const DISPLAY = @"display";
             int index = [number intValue];
             if (NSLocationInRange(index, range)) {
                 index = index - 1;
-                ((Dice *) _dices[index]).hold = YES;
+                _lastDiceHeld = (Dice *) _dices[index];
+                _lastDiceHeld.hold = YES;
                 [_holds addObject:_dices[index]];
+                _anyDiceHeld = YES;
                 break;
             } else {
                 NSLog(@"Invalid number! range [1 - 5]");
@@ -110,7 +126,12 @@ static NSString *const DISPLAY = @"display";
             int index = [number intValue];
             if (NSLocationInRange(index, range)) {
                 index = index - 1;
-                ((Dice *) _dices[index]).hold = NO;
+                Dice *currentDice = (Dice *) _dices[index];
+                if (currentDice != _lastDiceHeld) {
+                    NSLog(@"You can not unhold else dice you held lastly!");
+                    continue;
+                }
+                currentDice.hold = NO;
                 [_holds removeObject:_dices[index]];
                 break;
             } else {
@@ -125,8 +146,19 @@ static NSString *const DISPLAY = @"display";
     for (Dice *dice in _dices) {
         dice.hold = NO;
     }
-    NSLog(@"All dices unheld!");
+    _rollNum = 0;
+    NSLog(@"All dices reset!");
 }
 
+- (void) display {
+    int score = 0;
+    for (Dice *dice in _dices) {
+        if (dice.hold) {
+            score += dice.value;
+        }
+    }
+    NSLog(@"Score: %d",score);
+    NSLog(@"Dices: %@ %@ %@ %@ %@", _dices[0], _dices[1], _dices[2], _dices[3], _dices[4]);
+}
 
 @end
