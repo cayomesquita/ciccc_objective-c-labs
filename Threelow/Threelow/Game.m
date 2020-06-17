@@ -16,6 +16,7 @@ static NSString *const HOLD = @"hold";
 static NSString *const UNHOLD = @"unhold";
 static NSString *const RESET = @"reset";
 static NSString *const DISPLAY = @"display";
+static NSString *const NEW_GAME = @"new game";
 static int const LIMIT_ROLLS = 5;
 
 @interface Game ()
@@ -25,7 +26,7 @@ static int const LIMIT_ROLLS = 5;
 @property int rollNum;
 @property (nonatomic) Dice *lastDiceHeld;
 @property BOOL anyDiceHeld;
-
+@property int lowerScore;
 
 @end
 
@@ -37,23 +38,30 @@ static int const LIMIT_ROLLS = 5;
         _holds = [[NSMutableSet alloc] init];
         _rollNum = 0;
         _anyDiceHeld = NO;
+        _lowerScore = [_dices count] * 6;
     }
     return self;
 }
 
 - (void) run {
-    while (_rollNum < LIMIT_ROLLS) {
+    for (; ; ) {
+        [self runTurn];
+    }
+}
+
+- (void) runTurn {
+    [self resetDice];
+    while (_rollNum < LIMIT_ROLLS && [_holds count] < [_dices count]) {
         NSString *input = [InputHandler inputUser:@"Enter menu option: "];
-        if ([QUIT isEqualToString:[input lowercaseString]]) {
-            break;
+//        if ([QUIT isEqualToString:[input lowercaseString]]) {
+//            break;
+//        }
+        if ([NEW_GAME isEqualToString:[input lowercaseString]]) {
+            [self newGame];
+            continue;
         }
         if ([ROLL isEqualToString:[input lowercaseString]]) {
-
-            for (Dice *dice in _dices) {
-                [dice roll];
-            }
-            _rollNum++;
-            _anyDiceHeld = NO;
+            [self roll];
             continue;
         }
         if (_rollNum == 0) {
@@ -69,8 +77,7 @@ static int const LIMIT_ROLLS = 5;
             continue;
         }
         if ([RESET isEqualToString:[input lowercaseString]]) {
-            [self resetDice];
-            continue;
+            break;
         }
         if ([DISPLAY isEqualToString:[input lowercaseString]]) {
             [self display];
@@ -78,7 +85,20 @@ static int const LIMIT_ROLLS = 5;
         }
         NSLog(@"Invalid input!");
     }
-    NSLog(@"Good bye!");
+    [self summarizeTurn];
+}
+
+- (void) roll {
+    if (_rollNum > 0 && !_anyDiceHeld) {
+        NSLog(@"Hold at least one dice!");
+        return;
+    }
+    for (Dice *dice in _dices) {
+        [dice roll];
+    }
+    _rollNum++;
+    _anyDiceHeld = NO;
+    [self display];
 }
 
 - (void) holdHandler {
@@ -101,6 +121,7 @@ static int const LIMIT_ROLLS = 5;
                 _lastDiceHeld.hold = YES;
                 [_holds addObject:_dices[index]];
                 _anyDiceHeld = YES;
+                NSLog(@"Dices: %@ %@ %@ %@ %@", _dices[0], _dices[1], _dices[2], _dices[3], _dices[4]);
                 break;
             } else {
                 NSLog(@"Invalid number! range [1 - 5]");
@@ -133,6 +154,7 @@ static int const LIMIT_ROLLS = 5;
                 }
                 currentDice.hold = NO;
                 [_holds removeObject:_dices[index]];
+                NSLog(@"Dices: %@ %@ %@ %@ %@", _dices[0], _dices[1], _dices[2], _dices[3], _dices[4]);
                 break;
             } else {
                 NSLog(@"Invalid number! range [1 - 5]");
@@ -146,19 +168,47 @@ static int const LIMIT_ROLLS = 5;
     for (Dice *dice in _dices) {
         dice.hold = NO;
     }
+    [_holds removeAllObjects];
     _rollNum = 0;
-    NSLog(@"All dices reset!");
+    _anyDiceHeld = NO;
 }
 
 - (void) display {
+    int score = [self score];
+    
+    NSLog(@"Rolls Number: %d", _rollNum);
+    NSLog(@"Score to beat: %d", _lowerScore);
+    NSLog(@"Score: %d", score);
+    NSLog(@"Dices: %@ %@ %@ %@ %@", _dices[0], _dices[1], _dices[2], _dices[3], _dices[4]);
+}
+
+- (int) score {
     int score = 0;
     for (Dice *dice in _dices) {
         if (dice.hold) {
             score += dice.value;
         }
     }
-    NSLog(@"Score: %d",score);
+    return score;
+}
+
+- (void) summarizeTurn {
+    for (Dice *dice in _dices) {
+        dice.hold = YES;
+    }
+    int score = [self score];
+    _lowerScore = MIN(_lowerScore, score);
+    NSLog(@"*** SUMMARY ***");
+    NSLog(@"Rolls Number: %d", _rollNum);
+    NSLog(@"Score: %d", [self score]);
     NSLog(@"Dices: %@ %@ %@ %@ %@", _dices[0], _dices[1], _dices[2], _dices[3], _dices[4]);
+}
+
+- (void) newGame {
+    NSLog(@"New Game");
+    [self resetDice];
+    _lastDiceHeld = NULL;
+    _lowerScore = [_dices count] * 6;
 }
 
 @end
