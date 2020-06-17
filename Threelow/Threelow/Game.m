@@ -17,6 +17,7 @@ static NSString *const UNHOLD = @"unhold";
 static NSString *const RESET = @"reset";
 static NSString *const DISPLAY = @"display";
 static NSString *const NEW_GAME = @"new game";
+static NSString *const WIN = @"win";
 static int const LIMIT_ROLLS = 5;
 
 @interface Game ()
@@ -53,9 +54,10 @@ static int const LIMIT_ROLLS = 5;
     [self resetDice];
     while (_rollNum < LIMIT_ROLLS && [_holds count] < [_dices count]) {
         NSString *input = [InputHandler inputUser:@"Enter menu option: "];
-//        if ([QUIT isEqualToString:[input lowercaseString]]) {
-//            break;
-//        }
+        if ([WIN isEqualToString:[input lowercaseString]]) {
+            [self win];
+            continue;
+        }
         if ([NEW_GAME isEqualToString:[input lowercaseString]]) {
             [self newGame];
             continue;
@@ -209,6 +211,14 @@ static int const LIMIT_ROLLS = 5;
     [self resetDice];
     _lastDiceHeld = NULL;
     _lowerScore = [_dices count] * 6;
+}
+
+- (void) win {
+    for (Dice *dice in _dices) {
+        dice.value = 1;
+        dice.hold = YES;
+        [_holds addObject:dice];
+    }
 }
 
 @end
