@@ -54,6 +54,9 @@ static int const LIMIT_ROLLS = 5;
     [self resetDice];
     while (_rollNum < LIMIT_ROLLS && [_holds count] < [_dices count]) {
         NSString *input = [InputHandler inputUser:@"Enter menu option: "];
+        if ([QUIT isEqualToString:[input lowercaseString]]) {
+            exit(0);
+        }
         if ([WIN isEqualToString:[input lowercaseString]]) {
             [self win];
             continue;
@@ -79,7 +82,8 @@ static int const LIMIT_ROLLS = 5;
             continue;
         }
         if ([RESET isEqualToString:[input lowercaseString]]) {
-            break;
+            [self resetDice];
+            continue;;
         }
         if ([DISPLAY isEqualToString:[input lowercaseString]]) {
             [self display];
