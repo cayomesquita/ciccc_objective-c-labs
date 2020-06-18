@@ -9,6 +9,24 @@
 #import <Foundation/Foundation.h>
 
 #import "Kitchen.h"
+#import "Pizza.h"
+
+
+@implementation NSString (PizzaSizeParser)
+
+- (PizzaSize) pizzaSizeFromString {
+    NSDictionary<NSString*, NSNumber*> *sizes = @{
+        @"small": @(small),
+        @"medium": @(medium),
+        @"large": @(large),
+    };
+    if ([sizes objectForKey:self] == nil) {
+        return [@(large) intValue];
+    }
+    return [sizes[self] intValue];
+}
+
+@end
 
 int main(int argc, const char * argv[])
 {
@@ -35,6 +53,17 @@ int main(int argc, const char * argv[])
             NSArray *commandWords = [inputString componentsSeparatedByString:@" "];
             
             // And then send some message to the kitchen...
+            
+            NSArray * toppings = [commandWords subarrayWithRange:NSMakeRange(1, [commandWords count] - 1)];
+            
+            if ([(NSString*)commandWords[0] isEqualToString:@"pepperoni"]) {
+                NSLog(@"Pizza: %@", [restaurantKitchen makePepperoni]);
+                continue;
+            }
+            
+            PizzaSize size = [commandWords[0] pizzaSizeFromString];
+                
+            NSLog(@"Pizza: %@", [restaurantKitchen makePizzaWithSize:size toppings:toppings]);
         }
 
     }
