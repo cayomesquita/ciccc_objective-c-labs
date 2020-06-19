@@ -10,7 +10,8 @@
 
 #import "Kitchen.h"
 #import "Pizza.h"
-
+#import "KitchenManagerA.h"
+#import "KitchenManagerB.h"
 
 @implementation NSString (PizzaSizeParser)
 
@@ -30,16 +31,16 @@
 
 int main(int argc, const char * argv[])
 {
-
-    @autoreleasepool {
         
-        NSLog(@"Please pick your pizza size and toppings:");
-        
-        Kitchen *restaurantKitchen = [Kitchen new];
-        
-        while (TRUE) {
-            // Loop forever
-            
+    NSLog(@"Please pick your pizza size and toppings:");
+    
+    Kitchen *restaurantKitchen = [Kitchen new];
+    KitchenManagerA *kitchenManagerA;
+    KitchenManagerB *kitchenManagerB;
+    
+    while (TRUE) {
+        // Loop forever
+        @autoreleasepool {
             NSLog(@"> ");
             char str[100];
             fgets (str, 100, stdin);
@@ -52,21 +53,37 @@ int main(int argc, const char * argv[])
             // Take the first word of the command as the size, and the rest as the toppings
             NSArray *commandWords = [inputString componentsSeparatedByString:@" "];
             
-            // And then send some message to the kitchen...
-            
-            NSArray * toppings = [commandWords subarrayWithRange:NSMakeRange(1, [commandWords count] - 1)];
-            
-            if ([(NSString*)commandWords[0] isEqualToString:@"pepperoni"]) {
+            int index = 0;
+            NSString *firstInput = commandWords[index];
+            if ([firstInput isEqualToString:@"pepperoni"]) {
                 NSLog(@"Pizza: %@", [restaurantKitchen makePepperoni]);
                 continue;
             }
+            // Assign Manager
+            if ([firstInput isEqualToString:@"<MA>"]) {
+                if (!kitchenManagerA) {
+                    kitchenManagerA = [[KitchenManagerA alloc] init];
+                }
+                index++;
+                restaurantKitchen.delegate = kitchenManagerA;
+            } else if ([firstInput isEqualToString:@"<MB>"]) {
+                if (!kitchenManagerB) {
+                    kitchenManagerB = [[KitchenManagerB alloc] init];
+                }
+                index++;
+                restaurantKitchen.delegate = kitchenManagerB;
+            } else {
+                restaurantKitchen.delegate = nil;
+            }
             
-            PizzaSize size = [commandWords[0] pizzaSizeFromString];
+            PizzaSize size = [commandWords[index++] pizzaSizeFromString];
+            NSArray * toppings = [commandWords subarrayWithRange:NSMakeRange(index, [commandWords count] - index)];
                 
             NSLog(@"Pizza: %@", [restaurantKitchen makePizzaWithSize:size toppings:toppings]);
         }
-
+        
     }
+
     return 0;
 }
 
