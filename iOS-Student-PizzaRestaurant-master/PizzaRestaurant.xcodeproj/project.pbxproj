@@ -13,6 +13,8 @@
 		C0146763249B203300E6F07A /* Pizza.m in Sources */ = {isa = PBXBuildFile; fileRef = C0146762249B203300E6F07A /* Pizza.m */; };
 		C0297D89249C6DA900D61481 /* KitchenManagerA.m in Sources */ = {isa = PBXBuildFile; fileRef = C0297D88249C6DA900D61481 /* KitchenManagerA.m */; };
 		C0297D8C249C6F3600D61481 /* KitchenManagerB.m in Sources */ = {isa = PBXBuildFile; fileRef = C0297D8B249C6F3600D61481 /* KitchenManagerB.m */; };
+		C0297D8F249C84C700D61481 /* DeliveryService.m in Sources */ = {isa = PBXBuildFile; fileRef = C0297D8E249C84C700D61481 /* DeliveryService.m */; };
+		C0297D92249C84D500D61481 /* DeliveryCar.m in Sources */ = {isa = PBXBuildFile; fileRef = C0297D91249C84D500D61481 /* DeliveryCar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +43,10 @@
 		C0297D88249C6DA900D61481 /* KitchenManagerA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KitchenManagerA.m; sourceTree = "<group>"; };
 		C0297D8A249C6F3600D61481 /* KitchenManagerB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KitchenManagerB.h; sourceTree = "<group>"; };
 		C0297D8B249C6F3600D61481 /* KitchenManagerB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KitchenManagerB.m; sourceTree = "<group>"; };
+		C0297D8D249C84C700D61481 /* DeliveryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryService.h; sourceTree = "<group>"; };
+		C0297D8E249C84C700D61481 /* DeliveryService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryService.m; sourceTree = "<group>"; };
+		C0297D90249C84D500D61481 /* DeliveryCar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeliveryCar.h; sourceTree = "<group>"; };
+		C0297D91249C84D500D61481 /* DeliveryCar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeliveryCar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,7 @@
 				C0297D84249C667400D61481 /* Kitchen */,
 				6001EC85197B4EC300F97011 /* Supporting Files */,
 				C0297D85249C668800D61481 /* Pizza */,
+				C0297D93249C84DC00D61481 /* Delivery */,
 			);
 			path = PizzaRestaurant;
 			sourceTree = "<group>";
@@ -120,6 +127,17 @@
 				C0146762249B203300E6F07A /* Pizza.m */,
 			);
 			name = Pizza;
+			sourceTree = "<group>";
+		};
+		C0297D93249C84DC00D61481 /* Delivery */ = {
+			isa = PBXGroup;
+			children = (
+				C0297D8D249C84C700D61481 /* DeliveryService.h */,
+				C0297D8E249C84C700D61481 /* DeliveryService.m */,
+				C0297D90249C84D500D61481 /* DeliveryCar.h */,
+				C0297D91249C84D500D61481 /* DeliveryCar.m */,
+			);
+			name = Delivery;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,11 +192,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0297D92249C84D500D61481 /* DeliveryCar.m in Sources */,
 				C0146763249B203300E6F07A /* Pizza.m in Sources */,
 				C0297D8C249C6F3600D61481 /* KitchenManagerB.m in Sources */,
 				6001EC90197B502F00F97011 /* Kitchen.m in Sources */,
 				C0297D89249C6DA900D61481 /* KitchenManagerA.m in Sources */,
 				6001EC84197B4EC300F97011 /* main.m in Sources */,
+				C0297D8F249C84C700D61481 /* DeliveryService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -55,6 +55,11 @@ int main(int argc, const char * argv[])
             
             int index = 0;
             NSString *firstInput = commandWords[index];
+            if ([firstInput isEqualToString:@"info"]) {
+                NSLog(@"ManagerA: %@", kitchenManagerA);
+                NSLog(@"ManagerA: %@", kitchenManagerB);
+                continue;
+            }
             if ([firstInput isEqualToString:@"pepperoni"]) {
                 NSLog(@"Pizza: %@", [restaurantKitchen makePepperoni]);
                 continue;
@@ -79,7 +84,7 @@ int main(int argc, const char * argv[])
             PizzaSize size = [commandWords[index++] pizzaSizeFromString];
             NSArray * toppings = [commandWords subarrayWithRange:NSMakeRange(index, [commandWords count] - index)];
                 
-            NSLog(@"Pizza: %@", [restaurantKitchen makePizzaWithSize:size toppings:toppings]);
+            [restaurantKitchen makePizzaWithSize:size toppings:toppings];
         }
         
     }
