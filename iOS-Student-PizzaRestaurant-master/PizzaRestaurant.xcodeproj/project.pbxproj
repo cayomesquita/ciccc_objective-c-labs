@@ -11,6 +11,8 @@
 		6001EC84197B4EC300F97011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6001EC83197B4EC300F97011 /* main.m */; };
 		6001EC90197B502F00F97011 /* Kitchen.m in Sources */ = {isa = PBXBuildFile; fileRef = 6001EC8F197B502F00F97011 /* Kitchen.m */; };
 		C0146763249B203300E6F07A /* Pizza.m in Sources */ = {isa = PBXBuildFile; fileRef = C0146762249B203300E6F07A /* Pizza.m */; };
+		C0297D89249C6DA900D61481 /* KitchenManagerA.m in Sources */ = {isa = PBXBuildFile; fileRef = C0297D88249C6DA900D61481 /* KitchenManagerA.m */; };
+		C0297D8C249C6F3600D61481 /* KitchenManagerB.m in Sources */ = {isa = PBXBuildFile; fileRef = C0297D8B249C6F3600D61481 /* KitchenManagerB.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +36,11 @@
 		6001EC8F197B502F00F97011 /* Kitchen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Kitchen.m; sourceTree = "<group>"; };
 		C0146761249B203300E6F07A /* Pizza.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pizza.h; sourceTree = "<group>"; };
 		C0146762249B203300E6F07A /* Pizza.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pizza.m; sourceTree = "<group>"; };
+		C0297D86249C66B200D61481 /* KitchenDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KitchenDelegate.h; sourceTree = "<group>"; };
+		C0297D87249C6DA900D61481 /* KitchenManagerA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KitchenManagerA.h; sourceTree = "<group>"; };
+		C0297D88249C6DA900D61481 /* KitchenManagerA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KitchenManagerA.m; sourceTree = "<group>"; };
+		C0297D8A249C6F3600D61481 /* KitchenManagerB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KitchenManagerB.h; sourceTree = "<group>"; };
+		C0297D8B249C6F3600D61481 /* KitchenManagerB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KitchenManagerB.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +84,9 @@
 			isa = PBXGroup;
 			children = (
 				6001EC83197B4EC300F97011 /* main.m */,
-				6001EC8E197B502F00F97011 /* Kitchen.h */,
-				6001EC8F197B502F00F97011 /* Kitchen.m */,
+				C0297D84249C667400D61481 /* Kitchen */,
 				6001EC85197B4EC300F97011 /* Supporting Files */,
-				C0146761249B203300E6F07A /* Pizza.h */,
-				C0146762249B203300E6F07A /* Pizza.m */,
+				C0297D85249C668800D61481 /* Pizza */,
 			);
 			path = PizzaRestaurant;
 			sourceTree = "<group>";
@@ -92,6 +97,29 @@
 				6001EC86197B4EC300F97011 /* PizzaRestaurant-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C0297D84249C667400D61481 /* Kitchen */ = {
+			isa = PBXGroup;
+			children = (
+				6001EC8E197B502F00F97011 /* Kitchen.h */,
+				6001EC8F197B502F00F97011 /* Kitchen.m */,
+				C0297D86249C66B200D61481 /* KitchenDelegate.h */,
+				C0297D87249C6DA900D61481 /* KitchenManagerA.h */,
+				C0297D88249C6DA900D61481 /* KitchenManagerA.m */,
+				C0297D8A249C6F3600D61481 /* KitchenManagerB.h */,
+				C0297D8B249C6F3600D61481 /* KitchenManagerB.m */,
+			);
+			name = Kitchen;
+			sourceTree = "<group>";
+		};
+		C0297D85249C668800D61481 /* Pizza */ = {
+			isa = PBXGroup;
+			children = (
+				C0146761249B203300E6F07A /* Pizza.h */,
+				C0146762249B203300E6F07A /* Pizza.m */,
+			);
+			name = Pizza;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,7 +175,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0146763249B203300E6F07A /* Pizza.m in Sources */,
+				C0297D8C249C6F3600D61481 /* KitchenManagerB.m in Sources */,
 				6001EC90197B502F00F97011 /* Kitchen.m in Sources */,
+				C0297D89249C6DA900D61481 /* KitchenManagerA.m in Sources */,
 				6001EC84197B4EC300F97011 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
